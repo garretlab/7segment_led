@@ -10,5 +10,5 @@
 * [1桁の数字を表示する - もっともっと関数化する](https://github.com/garretlab/7segment_led/tree/master/seven_segment_led07)
 * [セグメント(4桁)をランダムに点灯する](https://github.com/garretlab/7segment_led/tree/master/seven_segment_led08)
 * [4桁を同時に点灯する](https://github.com/garretlab/7segment_led/tree/master/seven_segment_led09)
-* [4桁の数字を表示する(カウンタ)]((https://github.com/garretlab/7segment_led/tree/master/seven_segment_led10)
+* [4桁の数字を表示する(カウンタ)](https://github.com/garretlab/7segment_led/tree/master/seven_segment_led10)
 * [4桁の数字を表示する(表示装置)](https://github.com/garretlab/7segment_led/tree/master/seven_segment_led11)
