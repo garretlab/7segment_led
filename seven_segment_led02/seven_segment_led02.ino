@@ -1,18 +1,23 @@
-const int anode_pin = 2;    // アノードに接続するArduinoのピン
-const int cathode_pin = 13; // カソードに接続するArduinoのピン
+// LEDをオン・オフする際の出力
+#define DIGIT_ON LOW
+#define DIGIT_OFF HIGH
+#define SEGMENT_ON HIGH
+#define SEGMENT_OFF LOW
+
+const int digitPin = 13;   // ディジット(コモン)に接続するArduinoのピン
+const int segmentPin = 2;  // セグメントに接続するArduinoのピン
 
 // setup()　は，最初に一度だけ実行される
 void setup() {
-  pinMode(anode_pin, OUTPUT);    // anode_pinを出力モードに設定する
-  pinMode(cathode_pin, OUTPUT);  // cathode_pinを出力モードに設定する
+  pinMode(digitPin, OUTPUT);    // digitPinを出力モードに設定する
+  pinMode(segmentPin, OUTPUT);  // segmentPinを出力モードに設定する
 }
 
 // loop() は，setup ()実行後，無限に実行される
 void loop() {
-  digitalWrite(cathode_pin, LOW);  // cathode_pinにLOWを出力する
-  digitalWrite(anode_pin, HIGH);   // anode_pinにHIGHを出力する
-  delay(500);                      // 500ミリ秒待つ
-  digitalWrite(anode_pin, LOW);    // anode_pinにHIGHを出力する
-  delay(500);                      // 500ミリ秒待つ
+  digitalWrite(digitPin, DIGIT_ON);       // digitPinをオンにする
+  digitalWrite(segmentPin, SEGMENT_ON);   // segmentPinをオンにする
+  delay(500);                             // 500ms 待つ
+  digitalWrite(segmentPin, SEGMENT_OFF);  // segmentPinをオフにする
+  delay(500);                             // 500ms 待つ
 }
-

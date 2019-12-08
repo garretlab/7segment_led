@@ -1,28 +1,34 @@
-const int anode_pins[] = {12, 8, 5, 3, 2, 11, 6, 4};    // アノードに接続するArduinoのピン
-const int cathode_pins[] = {7, 9, 10, 13};  // カソードに接続するArduinoのピン
-const int number_of_anode_pins = sizeof(anode_pins) / sizeof(anode_pins[0]);
-const int number_of_cathode_pins = sizeof(cathode_pins) / sizeof(cathode_pins[0]);
+// LEDをオン・オフする際の出力
+#define DIGIT_ON LOW
+#define DIGIT_OFF HIGH
+#define SEGMENT_ON HIGH
+#define SEGMENT_OFF LOW
 
-// 各桁で点灯するセグメント。右の桁から。
-const int turn_on_pins[] = {2, 11, 12, 3}; 
+const int digitPins[] = {7, 9, 10, 13};                                        // ディジット(コモン)に接続するArduinoのピン
+const int segmentPins[] = {12, 8, 5, 3, 2, 11, 6};                             // セグメントピンに接続するArduinoのピン
+const int numberOfDigitPins = sizeof(digitPins) / sizeof(digitPins[0]);        // ディジットの数
+const int numberOfSegmentPins = sizeof(segmentPins) / sizeof(segmentPins[0]);  // セグメントの数
+
+// 各桁で点灯するセグメントに接続しているArduinoのピン番号。
+const int turnOnPins[] = {2, 11, 12, 3};
 
 // setup()　は，最初に一度だけ実行される
 void setup() {
-  for (int i = 0; i < number_of_anode_pins; i++) {
-    pinMode(anode_pins[i], OUTPUT);  // anode_pinsを出力モードに設定する
+  for (int i = 0; i < numberOfDigitPins; i++) {
+    pinMode(digitPins[i], OUTPUT);  // digitPinsを出力モードに設定する
+    digitalWrite(digitPins[i], DIGIT_OFF);
   }
-  for (int i = 0; i < number_of_cathode_pins; i++) {
-    pinMode(cathode_pins[i], OUTPUT);  // cathode_pinを出力モードに設定する
-    digitalWrite(cathode_pins[i], HIGH);
+  for (int i = 0; i < numberOfSegmentPins; i++) {
+    pinMode(segmentPins[i], OUTPUT);  // segmentPinsを出力モードに設定する
   }
 }
 
-void loop () {
-  for (int i = 0; i < number_of_cathode_pins; i++) {
-    digitalWrite(cathode_pins[i], LOW);  // 表示桁を選択
-    digitalWrite(turn_on_pins[i], HIGH); // 表示するセグメントのアノードをHIGHにする
-    delay(3);  // 明るさ調整用。点滅しない程度に。
-    digitalWrite(turn_on_pins[i], LOW); // アノードをすべてLOWにする
-    digitalWrite(cathode_pins[i], HIGH); // 選択したカソードをHIGHにする
+void loop() {
+  for (int i = 0; i < numberOfDigitPins; i++) {  // 表示桁を選択
+    digitalWrite(digitPins[i], DIGIT_ON);        // ディジットをオンに
+    digitalWrite(turnOnPins[i], SEGMENT_ON);     // セグメントをオンに
+    delay(3);                                    // 明るさ調整用。点滅しない程度に。
+    digitalWrite(digitPins[i], DIGIT_OFF);       // ディジットをオフに
+    digitalWrite(turnOnPins[i], SEGMENT_OFF);    // セグメントをオフに
   }
 }

@@ -1,70 +1,78 @@
-const int anode_a = 12;  //アノードに接続するArduinoのピン
-const int anode_b = 8;
-const int anode_c = 5;
-const int anode_d = 3;
-const int anode_e = 2;
-const int anode_f = 11;
-const int anode_g = 6;
-const int cathode_pin = 13; // カソードに接続するArduinoのピン
+// LEDをオン・オフする際の出力
+#define DIGIT_ON LOW
+#define DIGIT_OFF HIGH
+#define SEGMENT_ON HIGH
+#define SEGMENT_OFF LOW
+
+const int digitPin = 13;     // ディジット(コモン)に接続するArduinoのピン
+const int segmentPinA = 12;  // セグメントピンに接続するArduinoのピン
+const int segmentPinB = 8;
+const int segmentPinC = 5;
+const int segmentPinD = 3;
+const int segmentPinE = 2;
+const int segmentPinF = 11;
+const int segmentPinG = 6;
 
 // 数字と表示させるセグメントの関係
 const int digits[] = {
-  0b00111111, // 0
-  0b00000110, // 1
-  0b01011011, // 2
-  0b01001111, // 3
-  0b01100110, // 4
-  0b01101101, // 5
-  0b01111101, // 6
-  0b00100111, // 7
-  0b01111111, // 8
-  0b01101111, // 9
+    0b00111111,  // 0
+    0b00000110,  // 1
+    0b01011011,  // 2
+    0b01001111,  // 3
+    0b01100110,  // 4
+    0b01101101,  // 5
+    0b01111101,  // 6
+    0b00100111,  // 7
+    0b01111111,  // 8
+    0b01101111,  // 9
 };
 
 // 数字を表示する
-void display_number (int n) {
+void displayNumber(int n) {
   // digits[n]の各ビットを調べて対応するセグメントを点灯・消灯する
-  digitalWrite(anode_a, digits[n] & 0b00000001 ? HIGH : LOW);
-  digitalWrite(anode_b, digits[n] & 0b00000010 ? HIGH : LOW);
-  digitalWrite(anode_c, digits[n] & 0b00000100 ? HIGH : LOW);
-  digitalWrite(anode_d, digits[n] & 0b00001000 ? HIGH : LOW);
-  digitalWrite(anode_e, digits[n] & 0b00010000 ? HIGH : LOW);
-  digitalWrite(anode_f, digits[n] & 0b00100000 ? HIGH : LOW);
-  digitalWrite(anode_g, digits[n] & 0b01000000 ? HIGH : LOW);
+  digitalWrite(segmentPinA, digits[n] & 0b00000001 ? SEGMENT_ON : SEGMENT_OFF);
+  digitalWrite(segmentPinB, digits[n] & 0b00000010 ? SEGMENT_ON : SEGMENT_OFF);
+  digitalWrite(segmentPinC, digits[n] & 0b00000100 ? SEGMENT_ON : SEGMENT_OFF);
+  digitalWrite(segmentPinD, digits[n] & 0b00001000 ? SEGMENT_ON : SEGMENT_OFF);
+  digitalWrite(segmentPinE, digits[n] & 0b00010000 ? SEGMENT_ON : SEGMENT_OFF);
+  digitalWrite(segmentPinF, digits[n] & 0b00100000 ? SEGMENT_ON : SEGMENT_OFF);
+  digitalWrite(segmentPinG, digits[n] & 0b01000000 ? SEGMENT_ON : SEGMENT_OFF);
 }
 
-void setup () {
-  pinMode(anode_a, OUTPUT);
-  pinMode(anode_b, OUTPUT);
-  pinMode(anode_c, OUTPUT);
-  pinMode(anode_d, OUTPUT);
-  pinMode(anode_e, OUTPUT);
-  pinMode(anode_f, OUTPUT);
-  pinMode(anode_g, OUTPUT);
-  pinMode(cathode_pin, OUTPUT);
+// setup()　は，最初に一度だけ実行される
+void setup() {
+  // ピンを出力モードに設定する
+  pinMode(digitPin, OUTPUT);
+  pinMode(segmentPinA, OUTPUT);
+  pinMode(segmentPinB, OUTPUT);
+  pinMode(segmentPinC, OUTPUT);
+  pinMode(segmentPinD, OUTPUT);
+  pinMode(segmentPinE, OUTPUT);
+  pinMode(segmentPinF, OUTPUT);
+  pinMode(segmentPinG, OUTPUT);
 }
 
-void loop () {
-  digitalWrite(cathode_pin, LOW);
-  display_number(0);
+// loop() は，setup ()実行後，無限に実行される
+void loop() {
+  digitalWrite(digitPin, DIGIT_ON);
+  displayNumber(0);
   delay(500);
-  display_number(1);
+  displayNumber(1);
   delay(500);
-  display_number(2);
+  displayNumber(2);
   delay(500);
-  display_number(3);
+  displayNumber(3);
   delay(500);
-  display_number(4);
+  displayNumber(4);
   delay(500);
-  display_number(5);
+  displayNumber(5);
   delay(500);
-  display_number(6);
+  displayNumber(6);
   delay(500);
-  display_number(7);
+  displayNumber(7);
   delay(500);
-  display_number(8);
+  displayNumber(8);
   delay(500);
-  display_number(9);
+  displayNumber(9);
   delay(500);
 }
-
