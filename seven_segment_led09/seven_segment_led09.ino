@@ -10,7 +10,7 @@ const int numberOfDigitPins = sizeof(digitPins) / sizeof(digitPins[0]);        /
 const int numberOfSegmentPins = sizeof(segmentPins) / sizeof(segmentPins[0]);  // セグメントの数
 
 // 各桁で点灯するセグメントに接続しているArduinoのピン番号。
-const int turnOnPins[] = {2, 11, 12, 3};
+const int turnOnPins[] = {3, 12, 11, 2};
 
 // setup()　は，最初に一度だけ実行される
 void setup() {

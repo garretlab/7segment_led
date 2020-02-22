@@ -4,7 +4,7 @@ const int number_of_anode_pins = sizeof(anode_pins) / sizeof(anode_pins[0]);
 const int number_of_cathode_pins = sizeof(cathode_pins) / sizeof(cathode_pins[0]);
 
 // 各桁で点灯するセグメント。右の桁から。
-const int turn_on_pins[] = {2, 11, 12, 3}; 
+const int turn_on_pins[] = {3, 12, 11, 2};
 
 // setup()　は，最初に一度だけ実行される
 void setup() {
