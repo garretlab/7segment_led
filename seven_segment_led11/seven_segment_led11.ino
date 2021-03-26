@@ -8,7 +8,7 @@ const int digitPins[] = {7, 9, 10, 13};                                        /
 const int segmentPins[] = {12, 8, 5, 3, 2, 11, 6};                             // セグメントピンに接続するArduinoのピン
 const int numberOfDigitPins = sizeof(digitPins) / sizeof(digitPins[0]);        // ディジットの数
 const int numberOfSegmentPins = sizeof(segmentPins) / sizeof(segmentPins[0]);  // セグメントの数
-int numbersToDisplay = 0;                                                      // LEDに表示する数字を保持する変数
+volatile int numbersToDisplay = 0;                                             // LEDに表示する数字を保持する変数
 
 // 数字と表示させるセグメントの関係
 const int digits[] = {
