@@ -41,15 +41,15 @@ void clearSegments() {
 
 // 4桁の数字を表示する
 void displayNumbers() {
-  int n = numbersToDisplay;                      // numberToDisplayの値を書き換えないために変数にコピー
-  for (int i = 0; i < numberOfDigitPins; i++) {  // 右の桁からディジットを選択する
-    digitalWrite(digitPins[i], DIGIT_ON);        // ディジットをオンにする
-    displayNumber(n % 10);                       // 10で割った余りを求めて、1の位を求め、表示する
-    delayMicroseconds(100);
-    clearSegments();                        // セグメントをすべてオフにする
-    digitalWrite(digitPins[i], DIGIT_OFF);  // ディジットをオフにする
-    n /= 10;                                // 10で割り、次に表示する数字を、1の位に移す
-  }
+    int n = numbersToDisplay;  // numberToDisplayの値を書き換えないために変数にコピー
+    static int digit = 0;
+    int div[] = {1, 10, 100, 1000};
+
+    clearSegments();                            // セグメントをすべてオフにする
+    digitalWrite(digitPins[digit], DIGIT_OFF);  // ディジットをオフにする
+    digit = (digit + 1) % numberOfDigitPins;    // 次のディジットを求める
+    digitalWrite(digitPins[digit], DIGIT_ON);   // ディジットをオンにする
+    displayNumber((n / div[digit]) % 10);　     // ディジットに対応する数字を表示する
 }
 
 // 表示する数字をセットする
