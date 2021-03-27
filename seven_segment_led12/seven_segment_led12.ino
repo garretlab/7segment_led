@@ -43,7 +43,7 @@ void clearSegments() {
 
 // 4桁の数字を表示する
 void displayNumbers() {
-    static int n = 0;
+    static int n = numberOfDigitPins;
     static int digit = 0;
     int div[] = {1, 10, 100, 1000};
 
