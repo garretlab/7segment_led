@@ -43,13 +43,16 @@ void clearSegments() {
 
 // 4桁の数字を表示する
 void displayNumbers() {
-    int n = numbersToDisplay;  // numberToDisplayの値を書き換えないために変数にコピー
+    static int n = 0;
     static int digit = 0;
     int div[] = {1, 10, 100, 1000};
 
     clearSegments();                            // セグメントをすべてオフにする
     digitalWrite(digitPins[digit], DIGIT_OFF);  // ディジットをオフにする
     digit = (digit + 1) % numberOfDigitPins;    // 次のディジットを求める
+    if (digit == 0) {
+        n = numbersToDisplay;  // numberToDisplayの値を書き換えないために変数にコピー
+    }
     digitalWrite(digitPins[digit], DIGIT_ON);   // ディジットをオンにする
     displayNumber((n / div[digit]) % 10);       // ディジットに対応する数字を表示する
 }
